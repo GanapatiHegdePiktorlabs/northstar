@@ -32,10 +32,10 @@ class App extends Component {
 }
 
 const AppContainer = createStackNavigator({
-    Home: App
+    Home: App, 
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: 'Home'
   }
 );
 
