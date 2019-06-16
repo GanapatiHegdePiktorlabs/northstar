@@ -74,8 +74,9 @@ const expData =[
         isHighImpact : 'no',
         isPublic : 'no',
         isCompleted : 'no',
-        percentage : '99%',
-        expDay:161
+        percentage : '30',
+        expDay:161,
+        daysRemaining:-100
     },
 ]
 const inProgressGoalData =[
