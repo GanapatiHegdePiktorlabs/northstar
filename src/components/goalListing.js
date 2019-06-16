@@ -13,10 +13,10 @@ import minusIcon from '../../images/remove.png';
 class GoalListing extends Component {
     constructor() {
         super();
-        this.state = { collapsed: false };
+        this.state = { showSoundImg: true };
       }
     renderImage(){
-        if(!this.state.collapsed){
+        if(this.state.showSoundImg){
             return (<Image style={ styles.iconStyle } source={plusIcon}></Image>);
         }else{
             return (<Image style={ styles.iconStyle } source={minusIcon}></Image>);
@@ -25,8 +25,8 @@ class GoalListing extends Component {
     render() {
         return (
             <View>
-            <Collapse isCollapsed={this.state.collapsed} onToggle={(isCollapsed)=>this.setState({collapsed:isCollapsed})}>
-              <CollapseHeader style={styles.containerStyle} >
+            <Collapse>
+              <CollapseHeader style={styles.containerStyle} onPress={ () => this.setState({ showSoundImg: !this.state.showSoundImg }) } >
               <View style={styles.containerContentStyle} >
               <Text>Your Expired Goals</Text>
               {this.renderImage()}
@@ -35,6 +35,25 @@ class GoalListing extends Component {
               </CollapseHeader>
               <CollapseBody>
              <GoalTemplate data = {expData}></GoalTemplate>
+                </CollapseBody>
+            </Collapse>
+
+            <Collapse>
+              <CollapseHeader style={styles.containerStyle}>
+                    <Text>Your Completed Goals</Text>
+              </CollapseHeader>
+              <CollapseBody>
+                        <GoalTemplate data = {inProgressGoalData}></GoalTemplate>
+                </CollapseBody>
+            </Collapse>
+            <Collapse>
+              <CollapseHeader style={styles.containerStyle}>
+                    <Text>Your In progress Goals</Text>
+              </CollapseHeader>
+              <CollapseBody>
+                        <Text>Aaron Bennet</Text>
+                        <Text>Claire Barclay</Text>
+                        <Text>Kelso Brittany</Text>
                 </CollapseBody>
             </Collapse>
            </View>
