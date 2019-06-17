@@ -4,6 +4,10 @@ import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-co
 import GoalTemplate from './goalListingComponents/goalTemplate';
 import plusIcon from '../../images/add.png';
 import minusIcon from '../../images/remove.png';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import GoalDetails from './goalDetail';
+
+
 
 
 
@@ -22,6 +26,10 @@ class GoalListing extends Component {
             return (<Image style={ styles.iconStyle } source={minusIcon}></Image>);
         }
       }
+      handleRoute(route){
+       console.log(route) // >> x , y, z 
+          }
+      
     render() {
         return (
             <View>
@@ -34,7 +42,7 @@ class GoalListing extends Component {
                   
               </CollapseHeader>
               <CollapseBody>
-             <GoalTemplate data = {expData}></GoalTemplate>
+             <GoalTemplate data = {expData} onPress = {this.props.onPress} ></GoalTemplate>
                 </CollapseBody>
             </Collapse>
 
@@ -111,4 +119,10 @@ const inProgressGoalData =[
         expDay:161
     },
 ]
+const RootStack = createStackNavigator({
+    CreateGoalPage: {
+      screen: GoalDetails,
+    },
+  },
+);
 export default GoalListing

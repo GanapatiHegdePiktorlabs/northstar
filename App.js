@@ -7,11 +7,12 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View,Text } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import GoalListing from './src/components/goalListing';
 import CreateGoalPage from './src/components/createGoal';
+import GoalDetails from './src/components/goalDetail';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -40,7 +41,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <GoalListing />
+        <GoalListing onPress={() => this.props.navigation.navigate('GoalDetails')}></GoalListing>
       </View>
     );
   }
@@ -53,6 +54,17 @@ const RootStack = createStackNavigator({
     CreateGoalPage: {
       screen: CreateGoalPage,
     },
+    GoalDetails:{
+      screen:GoalDetails,
+      navigationOptions: ({navigation}) => ({
+        headerTitleStyle: {fontSize: 18},
+        headerTintColor: '#fff',
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        title:"Goal Details",
+    })
+    }
   },
   {
     initialRouteName: 'Home',
