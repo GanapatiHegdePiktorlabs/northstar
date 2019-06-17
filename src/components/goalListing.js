@@ -4,6 +4,10 @@ import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-co
 import GoalTemplate from './goalListingComponents/goalTemplate';
 import plusIcon from '../../images/add.png';
 import minusIcon from '../../images/remove.png';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import GoalDetails from './goalDetail';
+
+
 
 
 
@@ -13,20 +17,24 @@ import minusIcon from '../../images/remove.png';
 class GoalListing extends Component {
     constructor() {
         super();
-        this.state = { collapsed: false };
+        this.state = { showSoundImg: true };
       }
     renderImage(){
-        if(!this.state.collapsed){
+        if(this.state.showSoundImg){
             return (<Image style={ styles.iconStyle } source={plusIcon}></Image>);
         }else{
             return (<Image style={ styles.iconStyle } source={minusIcon}></Image>);
         }
       }
+      handleRoute(route){
+       console.log(route) // >> x , y, z 
+          }
+      
     render() {
         return (
             <View>
-            <Collapse isCollapsed={this.state.collapsed} onToggle={(isCollapsed)=>this.setState({collapsed:isCollapsed})}>
-              <CollapseHeader style={styles.containerStyle} >
+            <Collapse>
+              <CollapseHeader style={styles.containerStyle} onPress={ () => this.setState({ showSoundImg: !this.state.showSoundImg }) } >
               <View style={styles.containerContentStyle} >
               <Text>Your Expired Goals</Text>
               {this.renderImage()}
@@ -34,7 +42,26 @@ class GoalListing extends Component {
                   
               </CollapseHeader>
               <CollapseBody>
-             <GoalTemplate data = {expData}></GoalTemplate>
+             <GoalTemplate data = {expData} onPress = {this.props.onPress} ></GoalTemplate>
+                </CollapseBody>
+            </Collapse>
+
+            <Collapse>
+              <CollapseHeader style={styles.containerStyle}>
+                    <Text>Your Completed Goals</Text>
+              </CollapseHeader>
+              <CollapseBody>
+                        <GoalTemplate data = {inProgressGoalData}></GoalTemplate>
+                </CollapseBody>
+            </Collapse>
+            <Collapse>
+              <CollapseHeader style={styles.containerStyle}>
+                    <Text>Your In progress Goals</Text>
+              </CollapseHeader>
+              <CollapseBody>
+                        <Text>Aaron Bennet</Text>
+                        <Text>Claire Barclay</Text>
+                        <Text>Kelso Brittany</Text>
                 </CollapseBody>
             </Collapse>
            </View>
@@ -93,4 +120,10 @@ const inProgressGoalData =[
         expDay:161
     },
 ]
+const RootStack = createStackNavigator({
+    CreateGoalPage: {
+      screen: GoalDetails,
+    },
+  },
+);
 export default GoalListing
